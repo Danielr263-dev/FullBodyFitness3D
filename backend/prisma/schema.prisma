@@ -1,0 +1,97 @@
+// Local dev runs on SQLite so the project works with zero external setup.
+// To point this at MySQL or Postgres later (matching the GameChop stack, say):
+//   datasource db {
+//     provider = "mysql"          // or "postgresql"
+//     url      = env("DATABASE_URL")
+//   }
+// and set DATABASE_URL to a real connection string. The rest of this file
+// (models, relations) doesn't need to change for that swap.
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id           Int        @id @default(autoincrement())
+  email        String     @unique
+  passwordHash String
+  name         String?
+  createdAt    DateTime   @default(now())
+  exercises    Exercise[]
+  workouts     Workout[]
+}
+
+model MuscleGroup {
+  id           Int      @id @default(autoincrement())
+  name         String   @unique
+  defaultColor String   @default("#e11d48")
+  muscles      Muscle[]
+}
+
+// mesh_id stays nullable for now — it gets filled in once the 3D model
+// (Blender export) exists and each muscle is matched to a mesh name.
+model Muscle {
+  id            Int              @id @default(autoincrement())
+  name          String
+  meshId        String?          @unique
+  muscleGroup   MuscleGroup      @relation(fields: [muscleGroupId], references: [id])
+  muscleGroupId Int
+  exercises     ExerciseMuscle[]
+}
+
+model Exercise {
+  id               Int               @id @default(autoincrement())
+  name             String
+  description      String?
+  isDefault        Boolean           @default(false)
+  createdBy        User?             @relation(fields: [createdById], references: [id])
+  createdById      Int?
+  muscles          ExerciseMuscle[]
+  workoutExercises WorkoutExercise[]
+  createdAt        DateTime          @default(now())
+}
+
+// Junction table: lets one exercise map to multiple muscles
+// (e.g. a bicep curl mapping to both the long and short head).
+model ExerciseMuscle {
+  exercise   Exercise @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+  exerciseId Int
+  muscle     Muscle   @relation(fields: [muscleId], references: [id], onDelete: Cascade)
+  muscleId   Int
+
+  @@id([exerciseId, muscleId])
+}
+
+model Workout {
+  id        Int               @id @default(autoincrement())
+  user      User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int
+  date      DateTime          @default(now())
+  notes     String?
+  exercises WorkoutExercise[]
+}
+
+model WorkoutExercise {
+  id         Int          @id @default(autoincrement())
+  workout    Workout      @relation(fields: [workoutId], references: [id], onDelete: Cascade)
+  workoutId  Int
+  exercise   Exercise     @relation(fields: [exerciseId], references: [id])
+  exerciseId Int
+  order      Int          @default(0)
+  sets       WorkoutSet[]
+}
+
+model WorkoutSet {
+  id                Int             @id @default(autoincrement())
+  workoutExercise   WorkoutExercise @relation(fields: [workoutExerciseId], references: [id], onDelete: Cascade)
+  workoutExerciseId Int
+  setNumber         Int
+  reps              Int
+  weight            Float
+  weightUnit        String          @default("lb")
+}

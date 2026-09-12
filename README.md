@@ -1,6 +1,6 @@
 # Fitness Tracker
 
-What's currently done: Auth, exercise/muscle schema, and workout logging. The 3D muscle
+Auth, exercise/muscle schema, and workout logging (steps 1-3). The 3D muscle
 viewer isn't wired in yet — `Muscle.meshId` is already in the schema and
 `Exercises.tsx` maps exercises to muscles via checkboxes as a stand-in for the
 future 3D "map to" picker, so the mapping data itself doesn't change later.
@@ -10,7 +10,7 @@ future 3D "map to" picker, so the mapping data itself doesn't change later.
 ```bash
 cd backend
 npm install
-cp .env.example .env       # shown for reference
+cp .env.example .env       # already done, but shown for reference
 npx prisma migrate dev --name init
 npm run prisma:seed
 npm run dev                 # http://localhost:4000
@@ -44,6 +44,6 @@ Vite proxies `/api` to `http://localhost:4000`, so run the backend first.
 
 ## Next up
 
-Export the trimmed Blender model, wire it into
+Steps 4-7 from the build plan: export the trimmed Blender model, wire it into
 an R3F viewer component, replace the checkbox muscle-picker with clicking the
 3D model, then muscle-group color settings and deploy.
