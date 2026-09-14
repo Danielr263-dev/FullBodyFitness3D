@@ -8,17 +8,38 @@ const groups = [
   {
     name: 'Chest',
     defaultColor: '#e11d48',
-    muscles: ['Pectoralis Major (Upper)', 'Pectoralis Major (Lower)'],
+    muscles: [
+      'Clavicular Head (Upper)', 
+      'Sternal Head (Middle)', 
+      'Abdominal Head (Lower)',
+    ],
   },
+  //For Chest, workouts target Pectoralis Major, not really Pectoralis Minor
   {
     name: 'Back',
     defaultColor: '#2563eb',
-    muscles: ['Latissimus Dorsi', 'Trapezius', 'Rhomboids'],
+    muscles: [
+      'Latissimus Dorsi', 
+      'Upper Trapezius', 
+      'Middle Trapezius', 
+      'Lower Trapezius',
+      'Rhomboids', 
+      'Erector Spinae', 
+      'Teres minor', 
+      'Teres major', 
+      'Infraspinatus',
+    ],
   },
+  /*For Back, some of these are only trained indirectly, not directly, 
+  but still good to add for the users to know their back anatomy, and myself */
   {
     name: 'Shoulders',
     defaultColor: '#d97706',
-    muscles: ['Anterior Deltoid', 'Lateral Deltoid', 'Posterior Deltoid'],
+    muscles: [
+      'Anterior Deltoid (Front)', 
+      'Lateral Deltoid (Middle)', 
+      'Posterior Deltoid (Rear)',
+    ],
   },
   {
     name: 'Arms',
@@ -26,19 +47,50 @@ const groups = [
     muscles: [
       'Biceps Brachii (Long Head)',
       'Biceps Brachii (Short Head)',
-      'Triceps Brachii',
+      'Brachialis',
+      'Triceps Brachii (Long Head)',
+      'Triceps Brachii (Lateral Head)',
+      'Tricep Brachii (Medial Head)',
     ],
+  },
+  //Seperated arms from forearms for better color coordination
+  {
+    name: 'Forearms',
+    defaultColor: '#96056a',
+    muscles: [
+      'Brachioradialis',
+      'Forearm Extensors',
+      'Forearm Flexors',
+    ]
   },
   {
     name: 'Legs',
     defaultColor: '#059669',
-    muscles: ['Quadriceps', 'Hamstrings', 'Glutes', 'Calves'],
+    muscles: [
+      'Quadriceps', 
+      'Hamstrings', 
+      'Gluteus Maximus',
+      'Gluteus Medius',
+      'Gluteus Minimus', 
+      'Calves (Lateral & Medial Head)',
+      'Adductors',
+    ],
   },
+  /*For glutes, the medius and minimus are usually activated together, and those 2 
+  can be activated seperatly from maximus and vice versa.
+  Hip abductors hit glutes, hip adductors hit 3-4 adductor muscles on inner thigh */
   {
     name: 'Core',
     defaultColor: '#0891b2',
-    muscles: ['Rectus Abdominis', 'Obliques'],
+    muscles: [
+      'Rectus Abdominis', 
+      'External Obliques (Outer)', 
+      'Internal Obliques (Inner)', 
+      'Transversus Abdominis (TVA)',
+    ],
   },
+  /*TVA is deepest layer of the stomach, requires bracing and hollowing out 
+  the stomach, so exercises like planks, deadbugs, stomach vacuums*/
 ]
 
 // exercise name -> muscle names it maps to
