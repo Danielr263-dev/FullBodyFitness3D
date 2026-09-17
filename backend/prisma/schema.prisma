@@ -18,7 +18,10 @@ generator client {
 
 model User {
   id           Int        @id @default(autoincrement())
+  // Holds either an email address or a phone number — login/register accept both
+  // through the same field, validated in src/routes/auth.ts.
   email        String     @unique
+  username     String?    @unique
   passwordHash String
   name         String?
   createdAt    DateTime   @default(now())

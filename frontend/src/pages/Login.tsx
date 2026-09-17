@@ -29,9 +29,9 @@ export default function Login() {
       <h1 className="text-2xl font-semibold tracking-tight">Log in</h1>
       <form onSubmit={handleSubmit} className="mt-6 space-y-4">
         <div>
-          <label className="block text-sm text-ink/70">Email</label>
+          <label className="block text-sm text-ink/70">Email / Phone Number</label>
           <input
-            type="email"
+            type="text"
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}

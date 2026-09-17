@@ -95,14 +95,34 @@ const groups = [
 
 // exercise name -> muscle names it maps to
 const defaultExercises: Record<string, string[]> = {
-  'Bench Press': ['Pectoralis Major (Upper)', 'Triceps Brachii', 'Anterior Deltoid'],
+  'Bench Press': [
+    'Clavicular Head (Upper)',
+    'Triceps Brachii (Long Head)',
+    'Triceps Brachii (Lateral Head)',
+    'Tricep Brachii (Medial Head)',
+    'Anterior Deltoid (Front)',
+  ],
   'Pull-Up': ['Latissimus Dorsi', 'Biceps Brachii (Long Head)'],
-  'Barbell Squat': ['Quadriceps', 'Glutes', 'Hamstrings'],
-  'Deadlift': ['Hamstrings', 'Glutes', 'Trapezius'],
-  'Overhead Press': ['Anterior Deltoid', 'Lateral Deltoid', 'Triceps Brachii'],
+  'Barbell Squat': ['Quadriceps', 'Gluteus Maximus', 'Gluteus Medius', 'Gluteus Minimus', 'Hamstrings'],
+  'Deadlift': [
+    'Hamstrings',
+    'Gluteus Maximus',
+    'Gluteus Medius',
+    'Gluteus Minimus',
+    'Upper Trapezius',
+    'Middle Trapezius',
+    'Lower Trapezius',
+  ],
+  'Overhead Press': [
+    'Anterior Deltoid (Front)',
+    'Lateral Deltoid (Middle)',
+    'Triceps Brachii (Long Head)',
+    'Triceps Brachii (Lateral Head)',
+    'Tricep Brachii (Medial Head)',
+  ],
   'Bicep Curl': ['Biceps Brachii (Long Head)', 'Biceps Brachii (Short Head)'],
-  'Tricep Pushdown': ['Triceps Brachii'],
-  'Plank': ['Rectus Abdominis', 'Obliques'],
+  'Tricep Pushdown': ['Triceps Brachii (Long Head)', 'Triceps Brachii (Lateral Head)', 'Tricep Brachii (Medial Head)'],
+  'Plank': ['Rectus Abdominis', 'External Obliques (Outer)', 'Internal Obliques (Inner)'],
 }
 
 async function main() {

@@ -5,6 +5,7 @@ interface User {
   id: number
   email: string
   name?: string | null
+  username?: string | null
 }
 
 interface AuthResponse {
@@ -16,7 +17,7 @@ interface AuthContextValue {
   user: User | null
   loading: boolean
   login: (email: string, password: string) => Promise<void>
-  register: (email: string, password: string, name?: string) => Promise<void>
+  register: (email: string, password: string, name?: string, username?: string) => Promise<void>
   logout: () => void
 }
 
@@ -45,8 +46,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     persist(res)
   }
 
-  async function register(email: string, password: string, name?: string) {
-    const res = await api.post<AuthResponse>('/auth/register', { email, password, name })
+  async function register(email: string, password: string, name?: string, username?: string) {
+    const res = await api.post<AuthResponse>('/auth/register', { email, password, name, username })
     persist(res)
   }
 
